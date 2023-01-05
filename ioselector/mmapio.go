@@ -1,7 +1,7 @@
 package ioselector
 
 import (
-	"github.com/studygo/project/rosedb-1.1.0/mmap"
+	"github.com/Ezekail/kaydb/mmap"
 	"io"
 	"os"
 )
