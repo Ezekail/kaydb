@@ -270,8 +270,8 @@ func (db *KayDB) LRange(key []byte, start, end int) (values [][]byte, err error)
 
 // LScan 返回存储在list中的所有key
 func (db *KayDB) LScan() []string {
-	db.listIndex.mu.Lock()
-	defer db.listIndex.mu.Unlock()
+	db.listIndex.mu.RLock()
+	defer db.listIndex.mu.RUnlock()
 
 	// 获取list 的所有key
 	index := db.listIndex.trees
