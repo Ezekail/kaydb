@@ -268,6 +268,20 @@ func (db *KayDB) LRange(key []byte, start, end int) (values [][]byte, err error)
 
 }
 
+// LScan 返回存储在list中的所有key
+func (db *KayDB) LScan() []string {
+	db.listIndex.mu.Lock()
+	defer db.listIndex.mu.Unlock()
+
+	// 获取list 的所有key
+	index := db.listIndex.trees
+	keys := make([]string, 0)
+	for key := range index {
+		keys = append(keys, key)
+	}
+	return keys
+}
+
 // 编码seq，往key头部插入seq
 func (db *KayDB) encodeListKey(key []byte, seq uint32) []byte {
 	// 编码seq，存入buf
